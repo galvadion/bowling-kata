@@ -16,28 +16,23 @@ class Game {
                 points += 10 + this.spareBonus(frameIndex)
                 frameIndex +=2
             }else{
-                points += this.rolls[frameIndex] + this.rolls[frameIndex+1]
+                points += this.framePoints(frameIndex)
                 frameIndex +=2
             }
         }
         return points;
     }
 
-    private spareBonus(frameIndex: number) {
-        return this.rolls[frameIndex + 2];
-    }
+    private framePoints = (frameIndex: number) =>
+        this.rolls[frameIndex] + this.rolls[frameIndex + 1]
 
-    private strikeBonus(frameIndex: number) {
-        return this.rolls[frameIndex + 1] + this.rolls[frameIndex + 2];
-    }
+    private spareBonus = (frameIndex: number) => this.rolls[frameIndex + 2]
 
-    private isStrike(frameIndex: number) {
-        return this.rolls[frameIndex] == 10;
-    }
+    private strikeBonus = (frameIndex: number) => this.rolls[frameIndex + 1] + this.rolls[frameIndex + 2]
 
-    private isSpare(frameIndex: number) {
-        return this.rolls[frameIndex] + this.rolls[frameIndex + 1] == 10;
-    }
+    private isStrike = (frameIndex: number) => this.rolls[frameIndex] == 10
+
+    private isSpare = (frameIndex: number) => this.rolls[frameIndex] + this.rolls[frameIndex + 1] == 10
 }
 
 describe('Given a bowling game', () => {
